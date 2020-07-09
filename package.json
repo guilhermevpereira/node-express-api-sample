@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/guilhermevpereira/node_express_api_sample#readme",
   "dependencies": {
+    "consign": "^0.1.6",
     "express": "^4.17.1"
   }
 }
