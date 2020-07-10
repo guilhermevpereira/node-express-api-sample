@@ -13,16 +13,16 @@ class Task {
             } else {
 
                 const newResult = result.map((itemTask) => {
-                    
+
                     const date = moment(itemTask.date).format('DD/MM/YYYY')
 
                     const created = moment(itemTask.created).format('DD/MM/YYYY')
 
-                    itemTask = {...itemTask, date, created }
+                    itemTask = { ...itemTask, date, created }
 
                     return itemTask
-                    
-                })                
+
+                })
                 res.json(newResult)
             }
         })
@@ -30,7 +30,7 @@ class Task {
 
     getTaskById(id, resp) {
 
-        const sql = 'select * from todo_app.tasks where id =?'
+        const sql = 'SELECT * FROM todo_app.tasks WHERE id =?'
 
         conexao.query(sql, id, (error, result) => {
 
@@ -64,6 +64,19 @@ class Task {
                 res.json(error)
             } else {
                 res.json(task)
+            }
+        })
+    }
+
+    deleteTask(id, resp) {
+
+        const sql = 'DELETE FROM todo_app.tasks where id =?'
+
+        conexao.query(sql, id, (error, result) => {
+            if (error) {
+                resp.json(error)
+            } else {
+                resp.json(result)
             }
         })
     }

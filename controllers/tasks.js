@@ -20,4 +20,12 @@ module.exports = app => {
 
         taskModel.getTaskById(id, res)
     })
+
+    app.delete("/tasks/:id", (req, res) => {
+
+        const id = req.params.id
+
+        taskModel.deleteTask(id, res)
+
+    })
 }
