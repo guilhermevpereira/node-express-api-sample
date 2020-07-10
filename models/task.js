@@ -80,6 +80,23 @@ class Task {
             }
         })
     }
+
+    updateTask(id, values, resp) {
+
+        if (values.date) {
+            values.date = moment(values.date, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
+        }
+
+        const sql = 'UPDATE tasks SET ? WHERE id = ?'
+
+        conexao.query(sql, [values, id], (error, result) => {
+            if (error) {
+                resp.json(error)
+            } else {
+                resp.json(result)
+            }
+        })
+    }
 }
 
 module.exports = new Task

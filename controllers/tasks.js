@@ -28,4 +28,14 @@ module.exports = app => {
         taskModel.deleteTask(id, res)
 
     })
+
+    app.patch("/tasks/:id", (req, res) => {
+
+        const id = req.params.id
+
+        const values = req.body
+
+        taskModel.updateTask(id, values, res)
+
+    })
 }
