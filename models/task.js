@@ -16,6 +16,26 @@ class Task {
         })
     }
 
+    getTaskById(id, resp) {
+
+        const sql = 'select * from todo_app.tasks where id =?'
+
+        conexao.query(sql, id, (error, result) => {
+
+            const date = moment(result[0].date).format('DD/MM/YYYY')
+
+            const created = moment(result[0].created).format('DD/MM/YYYY')
+
+            const taskResult = {...result[0], date, created}
+
+            if (error) {
+                resp.json(error)
+            } else {
+                resp.json(taskResult)
+            }
+        }) 
+    }
+
     addTask(task, res) {
 
         const sql = "INSERT INTO tasks SET ?"

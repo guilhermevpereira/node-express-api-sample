@@ -13,4 +13,11 @@ module.exports = app => {
 
         taskModel.addTask(task, res)   
     })
+
+    app.get("/tasks/:id", (req, res) => {
+        
+        const id = req.params.id
+
+        taskModel.getTaskById(id, res)
+    })
 }
