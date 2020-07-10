@@ -11,7 +11,19 @@ class Task {
             if (error) {
                 res.json(error)
             } else {
-                res.json(result)
+
+                const newResult = result.map((itemTask) => {
+                    
+                    const date = moment(itemTask.date).format('DD/MM/YYYY')
+
+                    const created = moment(itemTask.created).format('DD/MM/YYYY')
+
+                    itemTask = {...itemTask, date, created }
+
+                    return itemTask
+                    
+                })                
+                res.json(newResult)
             }
         })
     }
@@ -26,14 +38,14 @@ class Task {
 
             const created = moment(result[0].created).format('DD/MM/YYYY')
 
-            const taskResult = {...result[0], date, created}
+            const taskResult = { ...result[0], date, created }
 
             if (error) {
                 resp.json(error)
             } else {
                 resp.json(taskResult)
             }
-        }) 
+        })
     }
 
     addTask(task, res) {
@@ -44,15 +56,15 @@ class Task {
 
         const date = moment(task.date, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
 
-        const newTask = {...task, created, date}
-        
+        const newTask = { ...task, created, date }
+
         conexao.query(sql, newTask, (error, result) => {
 
             if (error) {
                 res.json(error)
             } else {
                 res.json(task)
-            }       
+            }
         })
     }
 }
