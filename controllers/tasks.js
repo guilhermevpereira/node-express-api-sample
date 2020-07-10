@@ -8,6 +8,9 @@ module.exports = app => {
     })
 
     app.post("/tasks", (req, res) => {
-        res.send("POST Request /tasks")        
+        
+        const task = req.body
+
+        taskModel.addTask(task, res)   
     })
 }
