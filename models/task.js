@@ -9,7 +9,7 @@ class Task {
 
         conexao.query(sql, (error, result) => {
             if (error) {
-                res.json(error)
+                res.status(400).json(error)
             } else {
 
                 const newResult = result.map((itemTask) => {
@@ -23,17 +23,21 @@ class Task {
                     return itemTask
 
                 })
-                res.json(newResult)
+                res.status(200).json(newResult)
             }
         })
     }
 
-    getTaskById(id, resp) {
+    getTaskById(id, res) {
 
         const sql = 'SELECT * FROM todo_app.tasks WHERE id =?'
 
         conexao.query(sql, id, (error, result) => {
 
+            if (!result[0]) {
+                return res.status(404).json({ errors: "Nenhum registro encontrado."});
+            }
+            
             const date = moment(result[0].date).format('DD/MM/YYYY')
 
             const created = moment(result[0].created).format('DD/MM/YYYY')
@@ -41,9 +45,9 @@ class Task {
             const taskResult = { ...result[0], date, created }
 
             if (error) {
-                resp.json(error)
+                resp.status(400).json(error)
             } else {
-                resp.json(taskResult)
+                resp.status(200).json(taskResult)
             }
         })
     }
@@ -61,9 +65,9 @@ class Task {
         conexao.query(sql, newTask, (error, result) => {
 
             if (error) {
-                res.json(error)
+                res.status(400).json(error)
             } else {
-                res.json(task)
+                res.status(200).json(task)
             }
         })
     }
@@ -74,9 +78,9 @@ class Task {
 
         conexao.query(sql, id, (error, result) => {
             if (error) {
-                resp.json(error)
+                resp.status(400).json(error)
             } else {
-                resp.json(result)
+                resp.status(200).json(result)
             }
         })
     }
@@ -91,9 +95,9 @@ class Task {
 
         conexao.query(sql, [values, id], (error, result) => {
             if (error) {
-                resp.json(error)
+                resp.status(400).json(error)
             } else {
-                resp.json(result)
+                resp.status(200).json(result)
             }
         })
     }
