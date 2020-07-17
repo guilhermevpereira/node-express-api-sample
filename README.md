@@ -1,2 +1,2 @@
 # node_express_api_sample
-Exemplo - API desenvolvida com o framework Express para Node.js
+Exemplo - API simples desenvolvida com o framework Express para Node.js
